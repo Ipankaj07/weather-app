@@ -2,8 +2,9 @@ import { GET_REPORT_LOADING, GET_REPORT_SUCCESS, GET_REPORT_FAILURE } from '../c
 
 const initialState = {
     isLoading: false,
-    data: {},
-    error: null
+    dailyData: {},
+    forcastData: [],
+    error: false
 }
 
 const weatherReducer = (state = initialState, action) => {
@@ -11,23 +12,25 @@ const weatherReducer = (state = initialState, action) => {
         case GET_REPORT_LOADING:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                error: false
             }
         case GET_REPORT_SUCCESS:
             return {
                 ...state,
                 isLoading: false,
-                data: action.payload
+                error: false,
+                dailyData: action.payload.dailyData,
+                forcastData: action.payload.forcastData,
             }
         case GET_REPORT_FAILURE:
             return {
                 ...state,
                 isLoading: false,
-                error: action.payload
+                error: true
             }
         default:
             return state;
     }
 }
-
 export default weatherReducer;

@@ -8,4 +8,5 @@ export const rootReducer = combineReducers({
 });
 
 export const store = createStore(rootReducer,
-    compose(applyMiddleware(thunk)));   
+    compose(applyMiddleware(thunk),
+    ));   
