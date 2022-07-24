@@ -7,14 +7,29 @@ import { IconContext } from "react-icons";
 import { MdLocationOn } from "react-icons/md";
 import { AiOutlineSearch } from "react-icons/ai";
 
-import { getReport } from "../../redux/action";
+import { getReport, getReportByGeoLocation } from "../../redux/action";
 
 function Search() {
+  let name = useSelector((state) => state.weather.dailyData.name);
+
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    setSearch(name ? name : "");
+  }, [name]);
 
   const dispatch = useDispatch();
 
-  let reportData = useSelector((state) => state.weather);
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let { latitude, longitude } = position.coords;
+        if (latitude && longitude) {
+          dispatch(getReportByGeoLocation(position.coords));
+        }
+      });
+    }
+  }, [dispatch]);
 
   const handleChange = () => {
     dispatch(getReport(search));
@@ -26,7 +41,7 @@ function Search() {
     }
   };
 
-  // console.log(reportData, "im from search option");
+  // console.log(name, "im from search option");
 
   return (
     <div>
