@@ -1,20 +1,17 @@
 import React from "react";
-import LoadingGif from "../../img/loading.gif";
-
+import { ThreeCircles } from "react-loader-spinner";
 function Loading() {
   return (
     <div
       className="loading"
       style={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        zIndex: "1",
-        backgroundColor: "#000",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
       }}
     >
-      <img src={LoadingGif} alt="loading" />
+      <ThreeCircles color="#008FFB" size={100} />
     </div>
   );
 }
