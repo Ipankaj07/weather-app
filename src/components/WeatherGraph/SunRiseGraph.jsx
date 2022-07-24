@@ -1,9 +1,95 @@
-import React from 'react';
+import React from "react";
+import Chart from "react-apexcharts";
 
 function SunRiseGraph() {
+  const sunOption = {
+    chart: {
+      type: "area",
+      animations: {
+        enabled: true,
+        easing: "linear",
+        speed: 1000,
+        animateGradually: {
+          enabled: true,
+          delay: 0,
+        },
+        dynamicAnimation: {
+          enabled: true,
+          speed: 1000,
+        },
+      },
+    },
+    chart: {
+      toolbar: {
+        show: false,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    grid: {
+      show: false,
+    },
+    xaxis: {
+      categories: ["12:00", "13:00", "14:00"],
+    },
+
+    yaxis: {
+      show: false,
+    },
+
+    tooltip: {
+      enabled: false,
+    },
+    colors: ["#ffe500"],
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        inverseColors: false,
+        opacityFrom: 0.5,
+        opacityTo: 0.5,
+        stops: [0, 100],
+      },
+      colors: ["#ffe500"],
+    },
+    stroke: {
+      curve: "smooth",
+      width: 2,
+    },
+  };
+
+  const sunSeries = [
+    {
+      name: "Sun",
+      data: [
+        {
+          x: "5:00 AM",
+          y: 0,
+        },
+        {
+          x: "12:00 PM",
+          y: 1,
+        },
+        {
+          x: "6:00 PM",
+          y: 0,
+        },
+      ],
+    },
+  ];
+
   return (
-    <div>SunRiseGraph</div>
-  )
+    <div>
+      <Chart
+        options={sunOption}
+        series={sunSeries}
+        type="area"
+        height="200"
+        background="#000"
+      />
+    </div>
+  );
 }
 
 export default SunRiseGraph;
