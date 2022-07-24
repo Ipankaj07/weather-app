@@ -95,16 +95,6 @@ function ForecastBox() {
                   ) : (
                     <img src={Sun} alt="sun" />
                   )}
-
-                  {/* <img
-                      src={`http://openweathermap.org/img/wn/${item.weather[0].description === "Clouds"
-                        ? "04d"
-                        : item.weather[0].main === "Rain"
-                        ? "09d"
-                        : "01d"}@2x.png`}
-                      alt="weather"
-                    /> */}
-
                   <div className="forecastItem__weather__description">
                     {item.weather[0].description}
                   </div>
