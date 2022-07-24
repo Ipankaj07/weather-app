@@ -85,7 +85,7 @@ function GraphSection() {
         </div>
         <div className="sunrise">
           <span className="bold">Sunset</span>
-          <span>04:4pm</span>
+          <span>04:40pm</span>
         </div>
       </div>
 
