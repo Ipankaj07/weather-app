@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
 import "./forecastBox.css";
@@ -9,30 +9,47 @@ import Rain from "../../img/rain.png";
 import Loading from "../Accessory/Loading";
 import { GoArrowSmallUp, GoArrowSmallDown } from "react-icons/go";
 
-function ForcastBox() {
-  const forcastReport = useSelector((state) => state.weather.forcastData);
+import { graphData } from "../../redux/action";
+
+function ForecastBox() {
+  const forecastReport = useSelector((state) => state.weather.forecastData);
   const loading = useSelector((state) => state.weather.isLoading);
+  const reportData = useSelector((state) => state.weather.hourlyData);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(graphData(reportData, 1));
+  }, [dispatch, reportData]);
 
   return (
     <div>
       {loading ? (
         <Loading />
       ) : (
-        <div className="forcastBox">
-          {forcastReport.map((item, index) => {
+        <div className="forecastBox">
+          {forecastReport.map((item, index) => {
             return (
-              <div className="forcastItem" key={index}>
-                <div className="forcastItem__date">
-                  <div className="forcastItem__date__day">
+              <div
+                className="forecastItem"
+                key={index}
+                onClick={() => {
+                  dispatch(
+                    graphData(reportData, index + 1 > 5 ? index - 2 : index + 1)
+                  );
+                }}
+              >
+                <div className="forecastItem__date">
+                  <div className="forecastItem__date__day">
                     {moment(item.dt * 1000).format("ddd")}
                   </div>
-                  <div className="forcastItem__date__date">
+                  <div className="forecastItem__date__date">
                     {moment(item.dt * 1000).format("MMM Do")}
                   </div>
                 </div>
-                <div className="forcastItem__temp">
+                <div className="forecastItem__temp">
                   <div
-                    className="forcastItem__temp__max"
+                    className="forecastItem__temp__max"
                     style={{
                       display: "flex",
                       flexDirection: "row",
@@ -44,7 +61,7 @@ function ForcastBox() {
                     </div>
                   </div>
                   <div
-                    className="forcastItem__temp__min"
+                    className="forecastItem__temp__min"
                     style={{
                       display: "flex",
                       flexDirection: "row",
@@ -57,7 +74,7 @@ function ForcastBox() {
                   </div>
                 </div>
 
-                <div className="forcastItem__weather__icon">
+                <div className="forecastItem__weather__icon">
                   {item.weather[0].main === "Clouds" ? (
                     <img src={Cloud} alt="cloud" />
                   ) : item.weather[0].main === "Rain" ? (
@@ -75,7 +92,7 @@ function ForcastBox() {
                       alt="weather"
                     /> */}
 
-                  <div className="forcastItem__weather__description">
+                  <div className="forecastItem__weather__description">
                     {item.weather[0].description}
                   </div>
                 </div>
@@ -88,4 +105,4 @@ function ForcastBox() {
   );
 }
 
-export default ForcastBox;
+export default ForecastBox;

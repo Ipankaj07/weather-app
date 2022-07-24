@@ -1,0 +1,55 @@
+.garphBox {
+  border-radius: 8px;
+  box-shadow: 0 8px 10px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.1), 0 -8px 12px 0 rgba(0, 0, 0, 0.05),
+    0 -2px 3px -2px rgba(0, 0, 0, 0.01);
+  padding: 1.5rem 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.currentTempImg {
+  width: 4rem;
+  height: auto;
+  margin-left: 1rem;
+}
+
+.currentTempDiv {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.currentTemp {
+  font-size: 3rem;
+  font-weight: 700;
+  margin: 0;
+  color: #000;
+}
+
+.presHumidData {
+  display: flex;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.otherData:first-of-type {
+  margin-right: 0.5rem;
+}
+
+.otherData {
+  background: #f3fbff;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.75rem;
+}
+
+.sunDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sunrise {
+  display: flex;
+  flex-direction: column;
+}

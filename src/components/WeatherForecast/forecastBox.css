@@ -1,4 +1,4 @@
-.forcastBox {
+.forecastBox {
   /* display: flex; */
   overflow-x: scroll;
   margin-bottom: 1.5rem;
@@ -8,12 +8,12 @@
   font-size: 0.8rem;
 }
 
-.forcastItem__weather__icon img {
+.forecastItem__weather__icon img {
   width: 3rem;
   height: 3rem;
 }
 
-.forcastItem {
+.forecastItem {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
@@ -30,22 +30,22 @@
   gap: 0.7rem;
 }
 
-.forcastItem::-webkit-scrollbar {
+.forecastItem::-webkit-scrollbar {
   display: none;
 }
 
-.forcastItem::-webkit-scrollbar-thumb {
+.forecastItem::-webkit-scrollbar-thumb {
   display: none;
 }
 
-.forcastItem div {
+.forecastItem div {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
-.forcastItem__temp__max div{
+.forecastItem__temp__max div{
   display: flex;
   flex-direction: row;
 }
