@@ -15,6 +15,11 @@ function ForecastBox() {
   const forecastReport = useSelector((state) => state.weather.forecastData);
   const loading = useSelector((state) => state.weather.isLoading);
   const reportData = useSelector((state) => state.weather.hourlyData);
+  const [activeBorder, setActiveBorder] = useState(0);
+
+  const changeActiveBorder = (index) => {
+    setActiveBorder(index);
+  };
 
   const dispatch = useDispatch();
 
@@ -37,6 +42,14 @@ function ForecastBox() {
                   dispatch(
                     graphData(reportData, index + 1 > 5 ? index - 2 : index + 1)
                   );
+                  changeActiveBorder(index);
+                }}
+                style={{
+                  border:
+                    index === activeBorder
+                      ? "2px solid #008FFB"
+                      : "2px solid #e0e0e0",
+                  cursor: "pointer",
                 }}
               >
                 <div className="forecastItem__date">
