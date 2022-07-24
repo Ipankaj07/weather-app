@@ -1,7 +1,11 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-function SunRiseGraph() {
+{
+  /*  sunRise={sunRise}
+        sunSet={sunSet} */
+}
+function SunRiseGraph({ sunRise, sunSet }) {
   const sunOption = {
     chart: {
       type: "area",
@@ -31,7 +35,7 @@ function SunRiseGraph() {
       show: false,
     },
     xaxis: {
-      categories: ["12:00", "13:00", "14:00"],
+      categories: ["12:00", "13:00", "18:00"],
     },
 
     yaxis: {
@@ -64,7 +68,7 @@ function SunRiseGraph() {
       name: "Sun",
       data: [
         {
-          x: "5:00 AM",
+          x: sunRise + "AM",
           y: 0,
         },
         {
@@ -72,7 +76,7 @@ function SunRiseGraph() {
           y: 1,
         },
         {
-          x: "6:00 PM",
+          x: sunSet + "PM",
           y: 0,
         },
       ],

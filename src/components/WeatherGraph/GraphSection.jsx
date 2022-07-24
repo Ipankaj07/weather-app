@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import moment from "moment";
 
 import Chart from "react-apexcharts";
 import "./graphSection.css";
@@ -7,8 +8,6 @@ import cloudImg from "../../img/cloudy.png";
 import SunRiseGraph from "./SunRiseGraph";
 
 import { useDispatch } from "react-redux";
-
-// import { graphData } from "../../redux/action";
 
 function GraphSection() {
   const dispatch = useDispatch();
@@ -37,8 +36,9 @@ function GraphSection() {
   let currentTemp;
   let pressure;
   let humidity;
+  let sunRise;
+  let sunSet;
 
-  // let reportData = useSelector((state) => state.weather.hourlyData);
   let dailyData = useSelector((state) => state.weather.dailyData);
 
   if (dailyData.name) {
@@ -46,11 +46,11 @@ function GraphSection() {
     currentTemp = (currentTemp - 273.15).toFixed(0);
     pressure = dailyData.main.pressure;
     humidity = dailyData.main.humidity;
+    sunRise = dailyData.sys.sunrise;
+    sunRise = moment.unix(sunRise).format("HH:mm");
+    sunSet = dailyData.sys.sunset;
+    sunSet = moment.unix(sunSet).format("HH:mm");
   }
-
-  // useEffect(() => {
-  //   dispatch(graphData(reportData, 1));
-  // }, [dispatch, reportData]);
 
   return (
     <div className="garphBox">
@@ -81,15 +81,15 @@ function GraphSection() {
       <div className="sunDiv">
         <div className="sunrise">
           <span className="bold">Sunrise</span>
-          <span>06:00am</span>
+          <span>{sunRise}AM</span>
         </div>
         <div className="sunrise">
           <span className="bold">Sunset</span>
-          <span>04:40pm</span>
+          <span>{sunSet}PM</span>
         </div>
       </div>
 
-      <SunRiseGraph />
+      <SunRiseGraph sunRise={sunRise} sunSet={sunSet} />
     </div>
   );
 }
