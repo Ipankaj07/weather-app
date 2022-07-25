@@ -86,11 +86,11 @@ const graphData = (hourlyData, day) => async (dispatch) => {
         let arr = hourlyData.map(item => {
             let date = new Date(item.dt * 1000);
             let dayOfWeek = date.getDay();
-            console.log(dayOfWeek, day);
+            // console.log(dayOfWeek, day);
             if (dayOfWeek === day) {
                 let temp = item.main.temp;
                 graphData.push(temp.toFixed(0));
-                console.log(temp);
+                // console.log(temp);
             }
         })
         dispatch(getGraphData(graphData));
