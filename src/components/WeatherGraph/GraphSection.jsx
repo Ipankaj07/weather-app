@@ -39,18 +39,17 @@ function GraphSection() {
   let sunRise;
   let sunSet;
 
-  let dailyData = useSelector((state) => state.weather.dailyData);
+  let dailyData = useSelector((state) => state.weather.helperData);
 
-  if (dailyData.name) {
-    currentTemp = dailyData.main.temp;
-    currentTemp = (currentTemp - 273.15).toFixed(0);
-    pressure = dailyData.main.pressure;
-    humidity = dailyData.main.humidity;
-    sunRise = dailyData.sys.sunrise;
-    sunRise = moment.unix(sunRise).format("HH:mm");
-    sunSet = dailyData.sys.sunset;
-    sunSet = moment.unix(sunSet).format("HH:mm");
+  if (dailyData.currentTemp) {
+    currentTemp = dailyData.currentTemp.toFixed(0);
+    pressure = dailyData.pressure;
+    humidity = dailyData.humidity;
+    sunRise = moment(dailyData.sunRise).format("HH:mm");
+    sunSet = moment(dailyData.sunSet).format("HH:mm");
   }
+
+  // console.log(dailyData.currentTemp, dailyData.pressure, dailyData.humidity, dailyData.sunRise, dailyData.sunSet);
 
   return (
     <div className="garphBox">

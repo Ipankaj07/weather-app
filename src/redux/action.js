@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { GET_REPORT_LOADING, GET_REPORT_SUCCESS, GET_REPORT_FAILURE, GET_GRAPH_DATA } from '../constant/weatherActionType';
+import { GET_REPORT_LOADING, GET_REPORT_SUCCESS, GET_REPORT_FAILURE, GET_GRAPH_DATA, GET_INDEX, HELPER_DATA } from '../constant/weatherActionType';
 
 const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
 
@@ -41,7 +41,6 @@ const getReport = (data) => async (dispatch) => {
         }
 
         dispatch(getReportSuccess(reportData));
-        // console.log(reportData, "im here from action");
     } catch (error) {
         dispatch(getReportFailure());
     }
@@ -65,7 +64,6 @@ const getReportByGeoLocation = (data) => async (dispatch) => {
             hourlyData
         }
         dispatch(getReportSuccess(reportData));
-        // console.log(reportData, "im here from action");
     }
     catch (error) {
         dispatch(getReportFailure());
@@ -79,6 +77,13 @@ const getGraphData = (data) => {
     }
 }
 
+const getIndex = (data) => {
+    return {
+        type: GET_INDEX,
+        payload: data
+    }
+}
+
 const graphData = (hourlyData, day) => async (dispatch) => {
     dispatch(getReportLoading());
     try {
@@ -86,15 +91,59 @@ const graphData = (hourlyData, day) => async (dispatch) => {
         let arr = hourlyData.map(item => {
             let date = new Date(item.dt * 1000);
             let dayOfWeek = date.getDay();
-            // console.log(dayOfWeek, day);
             if (dayOfWeek === day) {
                 let temp = item.main.temp;
                 graphData.push(temp.toFixed(0));
-                // console.log(temp);
             }
         })
         dispatch(getGraphData(graphData));
-        // console.log(graphData, "im here from action");
+        dispatch(getIndex(day));
+    }
+    catch (error) {
+        dispatch(getReportFailure());
+    }
+}
+
+/**
+ helperData: {
+        currentTemp: 0,
+        pressure: 0,
+        humidity: 0,
+        sunRise: 0,
+        sunSet: 0
+},
+ */
+
+const getHelperData = (data) => {
+    return {
+        type: HELPER_DATA,
+        payload: data
+    }
+}
+
+const helperData = (forecastReport, day) => async (dispatch) => {
+    dispatch(getReportLoading());
+    try {
+        let helperData = {
+            currentTemp: 0,
+            pressure: 0,
+            humidity: 0,
+            sunRise: 0,
+            sunSet: 0
+        }
+        let arr = forecastReport.map(item => {
+            let date = new Date(item.dt * 1000);
+            let dayOfWeek = date.getDay();
+            if (dayOfWeek === day) {
+                helperData.currentTemp = item.temp.day;
+                helperData.pressure = item.pressure;
+                helperData.humidity = item.humidity;
+                helperData.sunRise = item.sunrise;
+                helperData.sunSet = item.sunset;
+            }
+        }
+        )
+        dispatch(getHelperData(helperData));
     }
     catch (error) {
         dispatch(getReportFailure());
@@ -103,5 +152,4 @@ const graphData = (hourlyData, day) => async (dispatch) => {
 
 
 
-
-export { getReport, getReportByGeoLocation, graphData };
+export { getReport, getReportByGeoLocation, graphData, helperData };

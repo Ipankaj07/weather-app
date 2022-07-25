@@ -9,13 +9,16 @@ import Rain from "../../img/rain.png";
 import Loading from "../Accessory/Loading";
 import { GoArrowSmallUp, GoArrowSmallDown } from "react-icons/go";
 
-import { graphData } from "../../redux/action";
+import { graphData, helperData } from "../../redux/action";
 
 function ForecastBox() {
   const forecastReport = useSelector((state) => state.weather.forecastData);
   const loading = useSelector((state) => state.weather.isLoading);
   const reportData = useSelector((state) => state.weather.hourlyData);
   const [activeBorder, setActiveBorder] = useState(0);
+  const day = useSelector((state) => state.weather.index);
+
+  // console.log(day);
 
   const changeActiveBorder = (index) => {
     setActiveBorder(index);
@@ -26,6 +29,12 @@ function ForecastBox() {
   useEffect(() => {
     dispatch(graphData(reportData, 1));
   }, [dispatch, reportData]);
+
+  useEffect(() => {
+    if (forecastReport && day) {
+      dispatch(helperData(forecastReport, day));
+    }
+  }, [dispatch, forecastReport, day]);
 
   return (
     <div>

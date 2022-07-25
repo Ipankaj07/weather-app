@@ -1,4 +1,4 @@
-import { GET_REPORT_LOADING, GET_REPORT_SUCCESS, GET_REPORT_FAILURE, GET_GRAPH_DATA } from '../constant/weatherActionType';
+import { GET_REPORT_LOADING, GET_REPORT_SUCCESS, GET_REPORT_FAILURE, GET_GRAPH_DATA, GET_INDEX, HELPER_DATA } from '../constant/weatherActionType';
 
 const initialState = {
     isLoading: false,
@@ -6,6 +6,14 @@ const initialState = {
     forecastData: [],
     hourlyData: [],
     graphData: [],
+    index: 0,
+    helperData: {
+        currentTemp: 0,
+        pressure: 0,
+        humidity: 0,
+        sunRise: 0,
+        sunSet: 0
+    },
     error: false
 }
 
@@ -36,6 +44,20 @@ const weatherReducer = (state = initialState, action) => {
             return {
                 ...state,
                 graphData: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case GET_INDEX:
+            return {
+                ...state,
+                index: action.payload,
+                isLoading: false,
+                error: false
+            }
+        case HELPER_DATA:
+            return {
+                ...state,
+                helperData: action.payload,
                 isLoading: false,
                 error: false
             }
