@@ -104,16 +104,6 @@ const graphData = (hourlyData, day) => async (dispatch) => {
     }
 }
 
-/**
- helperData: {
-        currentTemp: 0,
-        pressure: 0,
-        humidity: 0,
-        sunRise: 0,
-        sunSet: 0
-},
- */
-
 const getHelperData = (data) => {
     return {
         type: HELPER_DATA,
@@ -129,7 +119,8 @@ const helperData = (forecastReport, day) => async (dispatch) => {
             pressure: 0,
             humidity: 0,
             sunRise: 0,
-            sunSet: 0
+            sunSet: 0,
+            imageData: "",
         }
         let arr = forecastReport.map(item => {
             let date = new Date(item.dt * 1000);
@@ -140,6 +131,7 @@ const helperData = (forecastReport, day) => async (dispatch) => {
                 helperData.humidity = item.humidity;
                 helperData.sunRise = item.sunrise;
                 helperData.sunSet = item.sunset;
+                helperData.imageData = item.weather[0].main;
             }
         }
         )

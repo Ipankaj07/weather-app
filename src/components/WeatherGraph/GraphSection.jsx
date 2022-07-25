@@ -4,7 +4,10 @@ import moment from "moment";
 
 import Chart from "react-apexcharts";
 import "./graphSection.css";
-import cloudImg from "../../img/cloudy.png";
+import Sun from "../../img/sun.png";
+import Cloud from "../../img/cloudy.png";
+import Rain from "../../img/rain.png";
+
 import SunRiseGraph from "./SunRiseGraph";
 
 import { useDispatch } from "react-redux";
@@ -38,6 +41,7 @@ function GraphSection() {
   let humidity;
   let sunRise;
   let sunSet;
+  let imageData;
 
   let dailyData = useSelector((state) => state.weather.helperData);
 
@@ -47,15 +51,29 @@ function GraphSection() {
     humidity = dailyData.humidity;
     sunRise = moment(dailyData.sunRise).format("HH:mm");
     sunSet = moment(dailyData.sunSet).format("HH:mm");
+    imageData = dailyData.imageData;
   }
 
-  // console.log(dailyData.currentTemp, dailyData.pressure, dailyData.humidity, dailyData.sunRise, dailyData.sunSet);
+  // console.log(
+  //   dailyData.imageData,
+  //   dailyData.currentTemp,
+  //   dailyData.pressure,
+  //   dailyData.humidity,
+  //   dailyData.sunRise,
+  //   dailyData.sunSet
+  // );
 
   return (
     <div className="garphBox">
       <div className="currentTempDiv">
         <h1 className="currentTemp">{currentTemp}°C</h1>
-        <img src={cloudImg} alt="Clouds" className="currentTempImg" />
+        <img
+          src={
+            imageData === "Clouds" ? Cloud : imageData === "Rain" ? Rain : Sun
+          }
+          alt="Clouds"
+          className="currentTempImg"
+        />
       </div>
 
       <Chart
