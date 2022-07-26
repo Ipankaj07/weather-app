@@ -28,6 +28,8 @@ function Search() {
           dispatch(getReportByGeoLocation(position.coords));
         }
       });
+    } else {
+      alert("Geolocation is not supported by this browser.");
     }
   }, [dispatch]);
 

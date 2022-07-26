@@ -89,7 +89,7 @@ const graphData = (hourlyData, day, date) => async (dispatch) => {
     try {
         let graphData = [];
         let arr = hourlyData.map(item => {
-            if ((item.dt_txt).split(" ")[0] == date) {
+            if ((item.dt_txt).split(" ")[0] === date) {
                 graphData.push(item.main.temp);
             }
         })

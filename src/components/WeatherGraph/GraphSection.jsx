@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
+import { getImage } from "../Accessory/imageFilter";
 
 import Chart from "react-apexcharts";
 import "./graphSection.css";
@@ -56,7 +57,7 @@ function GraphSection() {
         <h1 className="currentTemp">{currentTemp}°C</h1>
         <img
           src={
-            imageData === "Clouds" ? Cloud : imageData === "Rain" ? Rain : Sun
+            getImage(imageData)
           }
           alt="Clouds"
           className="currentTempImg"

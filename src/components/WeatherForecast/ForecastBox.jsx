@@ -10,6 +10,7 @@ import Loading from "../Accessory/Loading";
 import { GoArrowSmallUp, GoArrowSmallDown } from "react-icons/go";
 
 import { graphData, helperData } from "../../redux/action";
+import { getImage } from "../Accessory/imageFilter";
 
 function ForecastBox() {
   const forecastReport = useSelector((state) => state.weather.forecastData);
@@ -100,15 +101,11 @@ function ForecastBox() {
                 </div>
 
                 <div className="forecastItem__weather__icon">
-                  {item.weather[0].main === "Clouds" ? (
-                    <img src={Cloud} alt="cloud" />
-                  ) : item.weather[0].main === "Rain" ? (
-                    <img src={Rain} alt="rain" />
-                  ) : (
-                    <img src={Sun} alt="sun" />
-                  )}
-                  <div className="forecastItem__weather__description">
-                    {item.weather[0].description}
+                  <img src={getImage(item.weather[0].main)} alt="sun" />
+                  <div className="forecastItem__weather__description" style={{
+                    marginTop: "0.2rem",
+                  }} >
+                  {item.weather[0].main}
                   </div>
                 </div>
               </div>
