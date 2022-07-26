@@ -37,9 +37,9 @@ function ForecastBox() {
 
   useEffect(() => {
     if (forecastReport && day) {
-      dispatch(helperData(forecastReport, day));
+      dispatch(helperData(forecastReport, day, date));
     }
-  }, [dispatch, forecastReport, day]);
+  }, [dispatch, forecastReport, day, date]);
 
   return (
     <div>

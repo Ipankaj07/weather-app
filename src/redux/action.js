@@ -1,4 +1,5 @@
 import axios from 'axios';
+import moment from 'moment';
 import { GET_REPORT_LOADING, GET_REPORT_SUCCESS, GET_REPORT_FAILURE, GET_GRAPH_DATA, GET_INDEX, HELPER_DATA } from '../constant/weatherActionType';
 
 const weatherApiKey = process.env.REACT_APP_WEATHER_API_KEY;
@@ -108,7 +109,7 @@ const getHelperData = (data) => {
     }
 }
 
-const helperData = (forecastReport, day) => async (dispatch) => {
+const helperData = (forecastReport, day, date) => async (dispatch) => {
     dispatch(getReportLoading());
     try {
         let helperData = {
@@ -120,9 +121,7 @@ const helperData = (forecastReport, day) => async (dispatch) => {
             imageData: "",
         }
         let arr = forecastReport.map(item => {
-            let date = new Date(item.dt * 1000);
-            let dayOfWeek = date.getDay();
-            if (dayOfWeek === day) {
+            if (moment(item.dt * 1000).format("YYYY-MM-DD") === date) {
                 helperData.currentTemp = item.temp.day;
                 helperData.pressure = item.pressure;
                 helperData.humidity = item.humidity;
