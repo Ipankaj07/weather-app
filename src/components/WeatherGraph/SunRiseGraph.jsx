@@ -1,10 +1,6 @@
 import React from "react";
 import Chart from "react-apexcharts";
 
-{
-  /*  sunRise={sunRise}
-        sunSet={sunSet} */
-}
 function SunRiseGraph({ sunRise, sunSet }) {
   const sunOption = {
     chart: {

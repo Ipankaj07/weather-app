@@ -18,7 +18,9 @@ function ForecastBox() {
   const [activeBorder, setActiveBorder] = useState(0);
   const day = useSelector((state) => state.weather.index);
 
-  // console.log(day);
+  const [idx, setIdx] = useState(1);
+  const todayDate = moment().format("YYYY-MM-DD");
+  const [date, setDate] = useState(todayDate);
 
   const changeActiveBorder = (index) => {
     setActiveBorder(index);
@@ -27,8 +29,10 @@ function ForecastBox() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(graphData(reportData, 1));
-  }, [dispatch, reportData]);
+    if (reportData[0]) {
+      dispatch(graphData(reportData, idx, date));
+    }
+  }, [dispatch, reportData, idx, date]);
 
   useEffect(() => {
     if (forecastReport && day) {
@@ -48,10 +52,9 @@ function ForecastBox() {
                 className="forecastItem"
                 key={index}
                 onClick={() => {
-                  dispatch(
-                    graphData(reportData, index + 1 > 5 ? index - 2 : index + 1)
-                  );
                   changeActiveBorder(index);
+                  setIdx(index + 1);
+                  setDate(moment(item.dt * 1000).format("YYYY-MM-DD"));
                 }}
                 style={{
                   border:

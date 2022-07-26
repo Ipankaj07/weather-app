@@ -84,16 +84,13 @@ const getIndex = (data) => {
     }
 }
 
-const graphData = (hourlyData, day) => async (dispatch) => {
+const graphData = (hourlyData, day, date) => async (dispatch) => {
     dispatch(getReportLoading());
     try {
         let graphData = [];
         let arr = hourlyData.map(item => {
-            let date = new Date(item.dt * 1000);
-            let dayOfWeek = date.getDay();
-            if (dayOfWeek === day) {
-                let temp = item.main.temp;
-                graphData.push(temp.toFixed(0));
+            if ((item.dt_txt).split(" ")[0] == date) {
+                graphData.push(item.main.temp);
             }
         })
         dispatch(getGraphData(graphData));

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 
 import Chart from "react-apexcharts";
@@ -10,11 +10,7 @@ import Rain from "../../img/rain.png";
 
 import SunRiseGraph from "./SunRiseGraph";
 
-import { useDispatch } from "react-redux";
-
 function GraphSection() {
-  const dispatch = useDispatch();
-
   let series = useSelector((state) => state.weather.graphData);
 
   const [options, setOptions] = useState({
@@ -53,15 +49,6 @@ function GraphSection() {
     sunSet = moment(dailyData.sunSet).format("HH:mm");
     imageData = dailyData.imageData;
   }
-
-  // console.log(
-  //   dailyData.imageData,
-  //   dailyData.currentTemp,
-  //   dailyData.pressure,
-  //   dailyData.humidity,
-  //   dailyData.sunRise,
-  //   dailyData.sunSet
-  // );
 
   return (
     <div className="garphBox">

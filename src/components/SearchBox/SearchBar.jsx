@@ -41,8 +41,6 @@ function Search() {
     }
   };
 
-  // console.log(name, "im from search option");
-
   return (
     <div>
       <div className="searchBox">
@@ -69,7 +67,7 @@ function Search() {
             <AiOutlineSearch />
           </IconContext.Provider>
         </button>
-        <section className="DropdownContainer"></section>
+        <section className="dropdownContainer"></section>
       </div>
     </div>
   );

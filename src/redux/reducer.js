@@ -7,13 +7,7 @@ const initialState = {
     hourlyData: [],
     graphData: [],
     index: 0,
-    helperData: {
-        currentTemp: 0,
-        pressure: 0,
-        humidity: 0,
-        sunRise: 0,
-        sunSet: 0
-    },
+    helperData: {},
     error: false
 }
 
