@@ -45,8 +45,8 @@ function GraphSection() {
     currentTemp = dailyData.currentTemp.toFixed(0);
     pressure = dailyData.pressure;
     humidity = dailyData.humidity;
-    sunRise = moment(dailyData.sunRise).format("HH:mm");
-    sunSet = moment(dailyData.sunSet).format("HH:mm");
+    sunRise = moment(dailyData.sunRise * 1000).format("HH:mm");
+    sunSet = moment(dailyData.sunSet * 1000).format("HH:mm");
     imageData = dailyData.imageData;
   }
 
