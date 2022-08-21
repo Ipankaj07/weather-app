@@ -64,15 +64,15 @@ function SunRiseGraph({ sunRise, sunSet }) {
       name: "Sun",
       data: [
         {
-          x: sunRise + "AM",
+          x: sunRise ,
           y: 0,
         },
         {
-          x: "12:00 PM",
+          x: "12:00 pm",
           y: 1,
         },
         {
-          x: sunSet + "PM",
+          x: sunSet,
           y: 0,
         },
       ],

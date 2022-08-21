@@ -46,8 +46,9 @@ function GraphSection() {
     currentTemp = dailyData.currentTemp.toFixed(0);
     pressure = dailyData.pressure;
     humidity = dailyData.humidity;
-    sunRise = moment(dailyData.sunRise * 1000).format("HH:mm");
-    sunSet = moment(dailyData.sunSet * 1000).format("HH:mm");
+    //covert in to 12 hour format
+    sunRise = moment(dailyData.sunRise * 1000).format("h:mm a");
+    sunSet = moment(dailyData.sunSet * 1000).format("h:mm a");
     imageData = dailyData.imageData;
   }
 
@@ -56,9 +57,7 @@ function GraphSection() {
       <div className="currentTempDiv">
         <h1 className="currentTemp">{currentTemp}°C</h1>
         <img
-          src={
-            getImage(imageData)
-          }
+          src={getImage(imageData)}
           alt="Clouds"
           className="currentTempImg"
         />
@@ -86,11 +85,11 @@ function GraphSection() {
       <div className="sunDiv">
         <div className="sunrise">
           <span className="bold">Sunrise</span>
-          <span>{sunRise}AM</span>
+          <span>{sunRise}</span>
         </div>
         <div className="sunrise">
           <span className="bold">Sunset</span>
-          <span>{sunSet}PM</span>
+          <span>{sunSet}</span>
         </div>
       </div>
 
